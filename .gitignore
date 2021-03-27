@@ -1,7 +1,12 @@
+.idea/
+.vscode/
+node_modules/
+build/
+tmp/
+temp/
+
 # dependencies
 /node_modules
-/packages/common/node_modules
-/packages/server/node_modules
 /.pnp
 .pnp.js
 
