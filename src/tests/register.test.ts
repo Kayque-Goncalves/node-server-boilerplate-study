@@ -1,11 +1,16 @@
 import { request } from "graphql-request"
-import { createConnection } from "typeorm"
+import { createTypeormConn } from "../utils/createTypeormConnection"
 
 import { User } from "../entity/User"
 import { host } from "./constants"
 
-const email = "tom@bob.com"
+beforeAll(async () =>{
+    await createTypeormConn()
+})
+
+const email = "tom@tom.com"
 const password = "tom123"
+
 const mutation = `
     mutation {
         register(email: "${ email }", password: "${ password }")
@@ -13,10 +18,9 @@ const mutation = `
 `
 
 test("Register user", async () => {
+
     const response = await request(host, mutation)
     expect(response).toEqual({ register: true })
-
-    await createConnection()
 
     const users = await User.find({ where: { email } })
     expect(users).toHaveLength(1)
@@ -28,4 +32,4 @@ test("Register user", async () => {
 
 // use a test database 
 // drop all data once the test is over
-// whnr I run yarn test it also start the server
+// when I run yarn test it also start the server
