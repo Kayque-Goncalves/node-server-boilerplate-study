@@ -7,6 +7,7 @@
       "gen-schema-types": "gql2ts src/schema.graphql -o src/types/schema.d.ts"
    },
    "jest": {
+      "globalSetup": "./src/testSetup/callSetup.js",
       "transform": {
          "^.+\\.tsx?$": "ts-jest"
       },
@@ -32,8 +33,8 @@
       "nodemon": "^2.0.7",
       "start-server-and-test": "^1.12.1",
       "ts-jest": "^26.5.4",
-      "ts-node": "3.3.0",
-      "typescript": "3.3.3333",
+      "ts-node": "^9.1.1",
+      "typescript": "^4.2.3",
       "win-node-env": "^0.4.0"
    },
    "dependencies": {
