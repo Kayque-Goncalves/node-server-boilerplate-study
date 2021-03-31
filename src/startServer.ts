@@ -4,10 +4,11 @@ import { mergeSchemas, makeExecutableSchema } from "graphql-tools"
 import { GraphQLSchema } from "graphql"
 import * as path from "path"
 import * as fs from "fs"
-import * as Redis from "ioredis"
+// import { default as Redis } from "ioredis"
+import Redis = require("ioredis")
 
 import { createTypeormConn } from "./utils/createTypeormConnection";
-import { User } from './entity/User'
+import { Test } from './entity/User'
 
 export const startServer = async () => {
     // GraphQL Stitching
@@ -32,14 +33,11 @@ export const startServer = async () => {
         const { id } = req.params
         const userId = await redis.get(id)
         if (userId) {
-            await User.update({ id: String(userId) }, { confirmed: true })
+            await Test.update({ id: userId }, { confirmed: true })
             res.send("ok")
         } else { 
             res.send("Invalid")
         }
-
-        console.log(id)
-        console.log(userId)
     })
 
     await createTypeormConn()

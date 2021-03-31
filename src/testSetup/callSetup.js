@@ -1,8 +1,8 @@
-require("ts-node/register")
+require('ts-node/register')
 
 const { setup } = require("./setup")
 
-module.export = async function() {
+module.exports = async function() {
     await setup()
     return null
 }

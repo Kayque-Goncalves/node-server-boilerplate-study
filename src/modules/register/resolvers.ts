@@ -2,7 +2,7 @@ import { ResolverMap } from "../../types/graphql-utils"
 import * as yup from "yup"
 import * as bcrypt from 'bcryptjs'
 
-import { User } from "../../entity/User"
+import { Test } from "../../entity/User"
 import { formatYupError } from "../../utils/formatYupErrors"
 import { duplicateEmail, emailNotLongEnough, invalidEmail, passwordNotLongEnough } from "./errorMessage"
 import { createConfirmEmailLink } from "../../utils/createConfirmEmailLink"
@@ -23,7 +23,7 @@ export const resolvers: ResolverMap = {
 
             const { email, password } = args
             
-            const userAlreadyExists = await User.findOne({
+            const userAlreadyExists = await Test.findOne({
                 where: { email },
                 select: ["id"]
             })
@@ -37,7 +37,7 @@ export const resolvers: ResolverMap = {
             }
 
             const hashedPassword = await bcrypt.hash(password, 10)
-            const user = User.create({
+            const user = Test.create({
                 email,
                 password: hashedPassword,
             })
